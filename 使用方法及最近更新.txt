@@ -9,6 +9,8 @@ antHelper.min.js目录下的胃antHelper.js的压缩文件，可直接手动引入到工程中；
 
 
 更新内容：
+相见aliAIP.js文件
+
 2018.11.16
 1.获取权益接口antHelper.getTicket（）增加了三个信息收集字段；
 2.获取权益接口回调函数移出框架外，方便自定义，如下：
