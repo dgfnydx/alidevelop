@@ -1,5 +1,6 @@
-1.在develop目录下运行终端命令：gulp run；
-2.在ARProject目录下的xxx.js为开发环境文件，即逻辑在此开发。xxx.fbx转码后自带的xxx.js为发布文件，已压缩，不适合编辑；
+1.clone到本地后在develop目录下运行终端命令：npm install安装相关依赖
+2.运行gulp run 命令后即可进入项目开发
+3.在ARProject目录下的xxx.js为开发环境文件，即逻辑在此开发。xxx.fbx转码后自带的xxx.js为发布文件，已压缩，不适合编辑；
 
 
 
