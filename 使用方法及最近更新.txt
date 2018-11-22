@@ -9,7 +9,33 @@ antHelper.min.js目录下的胃antHelper.js的压缩文件，可直接手动引入到工程中；
 
 
 更新内容：
-相见aliAIP.js文件
+详见aliAIP.js文件
+
+2018.11.22
+1.优化倒计时功能模块antHelper.countDown(),
+1.1原来固定两位数倒计时，优化后可一位可多位；
+1.2优化回调函数
+原来倒计时结束后回调一次；
+优化后每秒钟回调一次，可根据时间调整物体的运动速度；
+
+antHelper.countDown({
+    totalTime: 19,
+    // 节点顺序从左到右 百 十 个
+    nodeArr: ["Sphere001"],
+    // 贴图路径第一部分
+    pathPart1: "time/Countdown-",
+    // 贴图路径第二部分
+    pathPart2: ".png",
+    // 倒计时结束回调
+    timeOutCallBack: function(totalTime, countDownTimer) {
+        if(totalTime <= 0) {
+            AR.clearInterval(countDownTimer);
+            AR.log("回调啦！")
+        }
+    }
+})
+
+
 
 2018.11.16
 1.获取权益接口antHelper.getTicket（）增加了三个信息收集字段；
