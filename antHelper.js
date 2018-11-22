@@ -240,23 +240,36 @@
          * @param  {[object]} cdconfig [description]
          * @return {[type]}          [description]
          */
-        countDown: function(cdconfig) {
-            var totalTime = cdconfig.totalTime;
-            var init1 = totalTime % 10;
-            var init2 = Math.floor(totalTime / 10) % 10;
-            AR.set_texture(cdconfig.firstNode, cdconfig.pathPart1 + init1 + cdconfig.pathPart2);
-            AR.set_texture(cdconfig.secondNode, cdconfig.pathPart1 + init2 + cdconfig.pathPart2);
+        countDown: function(cdConfig) {
+            var len = cdConfig.nodeArr.length;
+            var totalTime = cdConfig.totalTime;
+            countMain();
             var countDownTimer = AR.setInterval(function() {
                 totalTime -= 1;
-                var firstVal = totalTime % 10;
-                var secondVal = Math.floor(totalTime / 10) % 10;
-                AR.set_texture(cdconfig.firstNode, cdconfig.pathPart1 + firstVal + cdconfig.pathPart2);
-                AR.set_texture(cdconfig.secondNode, cdconfig.pathPart1 + secondVal + cdconfig.pathPart2);
-                if(totalTime <= 0) {
-                    AR.clearInterval(countDownTimer);
-                    cdconfig.timeOutCallBack();
-                }
+                countMain();
+                cdConfig.timeOutCallBack(totalTime, countDownTimer);
+                // if(totalTime <= 0) {
+                //     AR.clearInterval(countDownTimer);
+                //     cdConfig.timeOutCallBack();
+                // }
             }, 1000);
+            function countMain() {
+                var totalStr = totalTime + "";
+                var totalArr = totalStr.split("");
+                var tlen = totalArr.length;
+                if(tlen < len) {
+                    for(var j = 0; j < len - tlen; j++) {
+                        totalArr.unshift("0");
+                    }
+                } else if(tlen > len) {
+                    AR.log("数值溢出");
+                    AR.clearInterval(countDownTimer);
+                    return false;
+                }
+                for(var i = 0; i < len; i++) {
+                    AR.set_texture(cdConfig.nodeArr[i], cdConfig.pathPart1 + totalArr[i] + cdConfig.pathPart2)
+                }
+            }
         },
         /**
          * [scoreboard 计分板]
