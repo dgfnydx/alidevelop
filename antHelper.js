@@ -340,7 +340,7 @@
          * @param  {[type]} repeatPlay [播放次数]
          * @return {[type]}            [description]
          */
-        playVideo: function(alphaVideo, videoNode, videoUrl, repeatPlay) {
+        videoPlay: function(alphaVideo, videoNode, videoUrl, repeatPlay) {
             if(alphaVideo) {
                 var options = {};
                 options.transparent = true;
@@ -350,6 +350,12 @@
                 AR.set_video(videoNode, videoUrl, repeatPlay)
                 AR.play_video(videoNode)
             }
+        },
+        audioPlay: function(config) {
+            var option = config.option || null;
+            var opt = JSON.stringify(option);
+            AR.audio.set(config.audioPath, opt);
+            AR.audio.play(config.audioPath);
         },
         /**
          * [userAuth 用户授权，获取基本信息nickName，avatar， gender，userId]
