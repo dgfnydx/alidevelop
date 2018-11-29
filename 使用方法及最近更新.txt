@@ -11,6 +11,19 @@ antHelper.min.js目录下的胃antHelper.js的压缩文件，可直接手动引入到工程中；
 更新内容：
 详见aliAIP.js文件
 
+2018.11.29
+1.优化收集接口（应用场景：藏宝图）
+antHelper.collect({
+    // 收集的标签
+    tag: "test",
+    callBack: function(response) {
+        // 可选
+    },
+    failcallBack: function(response) {
+        // 可选
+    }
+ })
+
 2018.11.22
 1.优化倒计时功能模块antHelper.countDown(),
 1.1原来固定两位数倒计时，优化后可一位可多位；

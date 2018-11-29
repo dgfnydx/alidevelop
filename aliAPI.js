@@ -1,3 +1,9 @@
+/*
+* @Author: DGF
+* @Date:   2017-10-24 10:50:35
+* @Last Modified by:   dgfnydx
+* @Last Modified time: 2018-11-29 15:58:03
+*/
 // <<<<<<<<<<<<<<<<<<<<<<< alipay API >>>>>>>>>>>>>>>>>>>>>>>>>>>
 // 实例化
 var antHelper = new AntHelper(antConfig);
@@ -157,22 +163,22 @@ antHelper.frameAnimation({
  * @param  {[object]} cdconfig [description]
  * @return {[type]}          [description]
  */
-antHelper.countDown(cdconfig);
+antHelper.countDown(cdConfig);
 // example
 antHelper.countDown({
-    // 总时间
-    totalTime: 20,
-    // 个位数节点
-    firstNode: "Sphere003",
-    // 十位数节点
-    secondNode: "Sphere002",
+    totalTime: 19,
+    // 节点顺序从左到右 百 十 个
+    nodeArr: ["Sphere001"],
     // 贴图路径第一部分
     pathPart1: "time/Countdown-",
     // 贴图路径第二部分
     pathPart2: ".png",
     // 倒计时结束回调
-    timeOutCallBack: function() {
-        AR.log("回调啦！")
+    timeOutCallBack: function(totalTime, countDownTimer) {
+        if(totalTime <= 0) {
+            AR.clearInterval(countDownTimer);
+            AR.log("回调啦！")
+        }
     }
 })
 
@@ -192,6 +198,17 @@ antHelper.scoreboard({
     // 贴图路径第二部分
     pathPart2: ".png",
     maxVal: 9
+})
+
+/**
+ * [textRender 文本渲染]
+ * @type {Number}
+ */
+antHelper.textRender({
+    fontSize: 20,
+    fontColor: "#a0ff00",
+    text: "今天是：2018年11月20日",
+    node: "kaiqi"
 })
 
 /**
@@ -221,7 +238,15 @@ antHelper.playAnimation(clip, animationName, repeat);
  * @param  {[type]} repeatPlay [播放次数]
  * @return {[type]}            [description]
  */
-antHelper.playVideo(alphaVideo, videoNode, videoUrl, repeatPlay);
+antHelper.videoPlay(alphaVideo, videoNode, videoUrl, repeatPlay);
+
+antHelper.audioPlay({
+    audioPath: "audio/birthday.mp3",
+    option: {
+        repeatCount: 2
+        // playEnd: "audio/loop.mp3"
+    }
+})
 
 /**
  * [userAuth 用户授权，获取基本信息nickName，avatar， gender，userId]
@@ -268,6 +293,30 @@ antHelper.userAuth({
  antHelper.sendScore({
     totalPoints: 90,
     projectName: "weiquan",
+    callBack: function(response) {
+        // 可选
+    },
+    failcallBack: function(response) {
+        // 可选
+    }
+ })
+
+//收集
+  antHelper.collect({
+    // 收集的标签
+    tag: "test",
+    callBack: function(response) {
+        // 可选
+    },
+    failcallBack: function(response) {
+        // 可选
+    }
+ })
+
+  //现金红包接口
+  antHelper.redPacket({
+    // 现金红包活动ID
+    activityId: "960518850",
     callBack: function(response) {
         // 可选
     },

@@ -489,24 +489,23 @@
                     failCallBack: config.failCallBack || null
                 })
         },
-        collect: function(tag) {
+        collect: function(config) {
             var action = 'com.gxar.project.user.collect.add';
             var envProps = {};
-            	envProps.project_id = this.project_id;
-            	envProps.pid = this.userId;
+                envProps.project_id = this.project_id;
+                envProps.pid = this.userId;
                 envProps.data = {};
-        		envProps.data[tag] = '1';
-                this.requestInfo(envProps, action, collectCallBack, collectFailCallBack)
+                envProps.data[config.tag] = '1';
+                this.requestInfo({
+                    envProps: envProps,
+                    action: action,
+                    callBack: config.callBack || null,
+                    failCallBack: config.failCallBack || null
+                })
 
         }
     }
 
-    var collectCallBack = function(response) {
-        AR.log("success" + response.data)
-    }
-    var collectFailCallBack = function(response) {
-        AR.log("fail" + response.data)
-    }
     // global.AntHelper = AntHelper;
     // 兼容commonJs规范
     if(typeof module !== "undefined" && module.exports) {
