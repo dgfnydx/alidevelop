@@ -11,6 +11,14 @@ antHelper.min.js目录下的胃antHelper.js的压缩文件，可直接手动引入到工程中；
 更新内容：
 详见aliAIP.js文件
 
+2018.12.13
+增加测试与正式互切功能，正式环境env不写
+var antHelper = new AntHelper({
+    projectId: "583076965",
+    env: "test"
+});
+
+
 2018.11.29
 1.优化收集接口（应用场景：藏宝图）
 antHelper.collect({
