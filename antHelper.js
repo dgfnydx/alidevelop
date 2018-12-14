@@ -313,6 +313,15 @@
             }
         },
         /**
+         * [textRender 文本渲染]
+         * @param  {[type]} config [description]
+         * @return {[type]}        [description]
+         */
+        textRender: function(config) {
+            var dataText = "<body><font size=" + config.fontSize + " color='" + config.fontColor + "'>" + config.text + "</font></body>";
+            AR.renderText(config.node, dataText);
+        },
+        /**
          * [setVisible 控制节点显隐]
          * @param {[type]} node [single node or array]
          * @param {[type]} bool [true or false]
@@ -394,7 +403,8 @@
                     appId: getAuthOptions.appId,
                     callback: function(success, data) {
                         if (success) {
-                                _this.nickName = data.userInfo.nickName;
+                                var base = new Base64();
+                                _this.nickName = base.encode(data.userInfo.nickName);
                                 _this.avatar = data.userInfo.avatar;
                                 _this.gender = data.userInfo.gender;
                                 _this.userId =  data.userInfo.userId;
@@ -437,11 +447,10 @@
         },
         getUserInfos: function() {
             var action = "com.gxar.project.user.logs.record";
-            var base = new Base64();
             var envProps = {};
                 envProps.project_id = this.project_id;
                 envProps.pid = this.userId;
-                envProps.nickname = base.encode(this.nickName);
+                envProps.nickname = this.nickName;
                 envProps.avatar = this.avatar;
                 envProps.gender = this.gender;
                 envProps.alipay_version = AR.getEnvProp("alipayVersion");
@@ -465,7 +474,6 @@
          */
         getTicket: function(config) {
             var action = "com.gxar.dev.ticket.get.voucher";
-            var base = new Base64();
             var envProps = {};
                 envProps.project_id = this.project_id;
                 envProps.pid = this.userId;
@@ -473,7 +481,6 @@
                 envProps.extras.pid = this.userId;
                 envProps.extras.avatar = this.avatar;
                 envProps.extras.gender = this.gender;
-                // envProps.extras.nickname = base.encode(this.nickName);
                 // envProps.extras.nickname = this.nickName;
                 envProps.tag = config.ticketTag;
                 // this.requestInfo(envProps, action, getTicketCallBack, getTicketFailCallBack)
@@ -514,7 +521,24 @@
                     failCallBack: config.failCallBack || null
                 })
 
-        }
+        },
+        redPacket: function(config) {
+            var action = "com.gxar.redpack.trigger";
+            var envProps = {};
+                envProps.setting_id = config.activityId;
+                envProps.pid = this.userId;
+                envProps.nickname = this.nickName;
+                envProps.avatar_url = this.avatar;
+                envProps.gender = this.gender;
+                envProps.user_agent = AR.getEnvProp('arUserAgent');
+                envProps.is_base64_nickname = 1;
+                this.requestInfo({
+                    envProps: envProps,
+                    action: action,
+                    callBack: config.callBack || null,
+                    failCallBack: config.failCallBack || null
+                })
+        },
     }
 
     // global.AntHelper = AntHelper;
