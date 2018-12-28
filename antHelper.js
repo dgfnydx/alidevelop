@@ -422,7 +422,7 @@
         },
         requestInfo: function(config) {
             var timestamp = Math.round(new Date().getTime() / 1000) + "";
-            var gataway = "https://api.gxar.com/rest.php";
+            // var gataway = "https://api.gxar.com/rest.php";
             var envPropsStr = JSON.stringify(config.envProps);
             var md5String = appKey + "&action=" + config.action + "&appid=" + appId + "&nonce=" + timestamp + "&params=" + envPropsStr + "&timestamp=" + timestamp;
             var hash = hex_md5(md5String).toUpperCase();
