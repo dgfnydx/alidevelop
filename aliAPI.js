@@ -2,7 +2,7 @@
 * @Author: DGF
 * @Date:   2017-10-24 10:50:35
 * @Last Modified by:   dgfnydx
-* @Last Modified time: 2018-11-29 15:58:03
+* @Last Modified time: 2019-01-04 14:01:13
 */
 // <<<<<<<<<<<<<<<<<<<<<<< alipay API >>>>>>>>>>>>>>>>>>>>>>>>>>>
 // 实例化
@@ -199,6 +199,14 @@ antHelper.scoreboard({
     pathPart2: ".png",
     maxVal: 9
 })
+// 浮点数显示
+antHelper.floatVal({
+    val: 0.9;
+    intArr: ["Sphere001"];
+    decArr: ["Sphere003"];
+    path1: "time/Countdown-";
+    path2: ".png";
+})
 
 /**
  * [textRender 文本渲染]
@@ -229,6 +237,15 @@ antHelper.setVisible(node, bool);
  * @example: antHelper.playAnimation(["box", "sphere"], "appear", 1);
  */
 antHelper.playAnimation(clip, animationName, repeat);
+
+/**
+ * [btnAnimation 静态按钮点击动画]
+ * @param  {[type]} animId [动画片段名称]
+ * @param  {[type]} nodeId [要设置动画的节点]
+ * @param  {[type]} ratio  [按钮缩放系数]
+ * @return {[type]}        [description]
+ */
+antHelper.btnAnimation(animId, nodeId, ratio);
 
 /**
  * [playVideo 普通或镂空视频播放]
@@ -283,8 +300,13 @@ antHelper.userAuth({
          var ticketUrl = obj.data.url;
              AR.open_url(ticketUrl)
              AR.toast("success" + ticketUrl)
+             if(ticketUrl != "" || ticketUrl != "undefined") {
+                 AR.setTimeout(function() {
+                     AR.set_texture("UI6_kaiqi", "BQCNY.fbm/btn_yikaiqi.png", 0);
+                 }, 800);
+             }
      },
-     failcallBack: function(response) {
+     failCallBack: function(response) {
         // 失败回调，可选
      }
  });
@@ -296,7 +318,7 @@ antHelper.userAuth({
     callBack: function(response) {
         // 可选
     },
-    failcallBack: function(response) {
+    failCallBack: function(response) {
         // 可选
     }
  })
@@ -308,7 +330,7 @@ antHelper.userAuth({
     callBack: function(response) {
         // 可选
     },
-    failcallBack: function(response) {
+    failCallBack: function(response) {
         // 可选
     }
  })
@@ -320,7 +342,7 @@ antHelper.userAuth({
     callBack: function(response) {
         // 可选
     },
-    failcallBack: function(response) {
+    failCallBack: function(response) {
         // 可选
     }
  })

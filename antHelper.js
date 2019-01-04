@@ -352,6 +352,27 @@
             }
         },
         /**
+         * [btnAnimation 静态按钮点击动画]
+         * @param  {[type]} animId [动画片段名称]
+         * @param  {[type]} nodeId [要设置动画的节点]
+         * @param  {[type]} ratio  [按钮缩放系数]
+         * @return {[type]}        [description]
+         */
+        btnAnimation: function(animId, nodeId, ratio) {
+            var scale = AR.get_scale(nodeId);
+            AR.log('box scale:(' + scale.x + ',' + scale.y + ',' + scale.z + ')');
+            antHelper.createAnimation({
+                animId: animId, 
+                nodeId: nodeId, 
+                propertyId: AR.animation.ANIMATE_SCALE, 
+                keyCount: 3, 
+                keyTimes: [0, 80, 160], 
+                keyValues: [scale.x, scale.y, scale.z, ratio, ratio, ratio, scale.x, scale.y, scale.z], 
+                type: AR.animation.CURVE_LINEAR
+            });
+            AR.play(animId + "#Default", 1);
+        },
+        /**
          * [playVideo 普通或镂空视频播放]
          * @param  {[type]} alphaVideo [视频类型，true:镂空，false：普通]
          * @param  {[type]} videoNode  [视频播放节点]
@@ -481,7 +502,7 @@
                 envProps.extras.pid = this.userId;
                 envProps.extras.avatar = this.avatar;
                 envProps.extras.gender = this.gender;
-                // envProps.extras.nickname = this.nickName;
+                envProps.extras.nickname = this.nickName;
                 envProps.tag = config.ticketTag;
                 // this.requestInfo(envProps, action, getTicketCallBack, getTicketFailCallBack)
                 this.requestInfo({
