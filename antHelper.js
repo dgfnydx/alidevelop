@@ -312,6 +312,37 @@
                 }
             }
         },
+        // 浮点数显示
+        floatVal: function(config) {
+            var val = config.val.toFixed(2);
+            var valArr = val.split(".");
+            var integer = valArr[0];
+            var decimal = valArr[1];
+            // integer
+            this.scoreboard({
+                total: integer,
+                // 节点顺序从左到右 百 十 个
+                nodeArr: config.intArr,
+                // 贴图路径第一部分
+                pathPart1: config.path1,
+                // 贴图路径第二部分
+                pathPart2: config.path2,
+                maxVal: 9
+            });
+            // decimal
+            this.scoreboard({
+                total: decimal,
+                // 节点顺序从左到右 百 十 个
+                nodeArr: config.decArr,
+                // 贴图路径第一部分
+                pathPart1: config.path1,
+                // 贴图路径第二部分
+                pathPart2: config.path2,
+                maxVal: 9
+            });
+            AR.log(typeof val)
+            AR.log(decimal)
+        },
         /**
          * [textRender 文本渲染]
          * @param  {[type]} config [description]
@@ -395,7 +426,9 @@
             var option = config.option || null;
             var opt = JSON.stringify(option);
             AR.audio.set(config.audioPath, opt);
-            AR.audio.play(config.audioPath);
+            if(config.autoPlay || false) {
+                AR.audio.play(config.audioPath);
+            }
         },
         /**
          * [userAuth 用户授权，获取基本信息nickName，avatar， gender，userId]

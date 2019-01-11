@@ -1,8 +1,8 @@
 /*
 * @Author: dgf
 * @Date:   2018-08-28 11:46:53
-* @Last Modified by:   dgf
-* @Last Modified time: 2018-11-16 14:14:54
+* @Last Modified by:   dgfnydx
+* @Last Modified time: 2019-01-11 11:24:30
 */
 
 var gulp = require("gulp");
@@ -96,9 +96,9 @@ AR.onclick = function(nodeId, x, y) {
     });
 }
 
-gulp.task("run", ["jsmin", "jsmin2"], function() {
+gulp.task("run", ["jsmin"], function() {
 	gulp.watch("ARProject/*.js", ["jsmin"]);
-	gulp.watch("antHelper.js", ["jsmin2"]);
+	// gulp.watch("antHelper.js", ["jsmin2"]);
 
 })
 
