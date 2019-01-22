@@ -430,6 +430,17 @@
                 AR.audio.play(config.audioPath);
             }
         },
+        systemWin: function(sysWinConfig) {
+            AR.confirm(
+                sysWinConfig.titleIcon,
+                sysWinConfig.titleText, 
+                sysWinConfig.contentIcon,
+                sysWinConfig.contentText, 
+                sysWinConfig.buttonText, 
+                sysWinConfig.callBack, 
+                sysWinConfig.showPocket
+            )
+        },
         /**
          * [userAuth 用户授权，获取基本信息nickName，avatar， gender，userId]
          * @return {[type]}             [description]
@@ -460,10 +471,17 @@
                                 var base = new Base64();
                                 _this.nickName = base.encode(data.userInfo.nickName);
                                 _this.avatar = data.userInfo.avatar;
-                                _this.gender = data.userInfo.gender;
+                                // _this.gender = data.userInfo.gender;
                                 _this.userId =  data.userInfo.userId;
                                 if(_this.nickName == null || _this.nickName == "") {
                                     _this.nickName = "default";
+                                }
+                                if(data.userInfo.gender == "m") {
+                                    _this.gender = 1;//男
+                                } else if (data.userInfo.gender == "f") {
+                                    _this.gender = 2;//女
+                                } else {
+                                    _this.gender = 0; //未知
                                 }
                                 _this.getUserInfos();
                                 // AR.toast("res" + _this.userId + _this.avatar + _this.gender + _this.nickName);
