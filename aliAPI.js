@@ -2,7 +2,7 @@
 * @Author: DGF
 * @Date:   2017-10-24 10:50:35
 * @Last Modified by:   dgfnydx
-* @Last Modified time: 2019-01-04 14:01:13
+* @Last Modified time: 2019-01-23 14:32:46
 */
 // <<<<<<<<<<<<<<<<<<<<<<< alipay API >>>>>>>>>>>>>>>>>>>>>>>>>>>
 // 实例化
@@ -263,6 +263,21 @@ antHelper.audioPlay({
         repeatCount: 2
         // playEnd: "audio/loop.mp3"
     }
+})
+
+// 系统弹窗
+antHelper.systemWin({
+    titleIcon: "2ddemo.fbm/logo.png",
+    titleText: "蚂蚁特工", 
+    contentIcon: "2ddemo.fbm/content.png",
+    contentText: "hello", 
+    buttonText: "确定", 
+    showPocket: true,
+    callBack: function(result) {
+        if(result) {
+            
+        }
+    },
 })
 
 /**
