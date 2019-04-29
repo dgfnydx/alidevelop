@@ -2,7 +2,7 @@
 * @Author: dgf
 * @Date:   2018-08-28 11:46:53
 * @Last Modified by:   dgfnydx
-* @Last Modified time: 2019-01-11 11:24:30
+* @Last Modified time: 2019-04-23 12:08:25
 */
 
 var gulp = require("gulp");
@@ -24,7 +24,11 @@ gulp.task("jsmin", function() {
 	    		} else {
 	    			console.log("<<<<<<<开始js压缩>>>>>>>>")
 	    			gulp.src("ARProject/*.js")
-	    				.pipe(uglify())
+	    				.pipe(uglify({
+	    					// mangle:true,//类型：Boolean 默认：true 是否修改变量名
+				            // compress:true,//类型：Boolean 默认：true 是否完全压缩
+				            // preserveComments:'all'//保留所有注释
+	    				}))
 	    				.on('error', createErrorHandler('uglify'))//压缩中遇到错误定位
 	    				.pipe(gulp.dest("ARProject/" + data[1] + "/"))
 	    		}
