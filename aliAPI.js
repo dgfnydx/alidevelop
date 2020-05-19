@@ -1,8 +1,8 @@
 /*
 * @Author: DGF
 * @Date:   2017-10-24 10:50:35
-* @Last Modified by:   dgfnydx
-* @Last Modified time: 2019-01-23 14:32:46
+* @Last Modified by:   dgf
+* @Last Modified time: 2019-12-02 16:59:25
 */
 // <<<<<<<<<<<<<<<<<<<<<<< alipay API >>>>>>>>>>>>>>>>>>>>>>>>>>>
 // 实例化
@@ -202,7 +202,9 @@ antHelper.scoreboard({
 // 浮点数显示
 antHelper.floatVal({
     val: 0.9;
+    // 整数部分
     intArr: ["Sphere001"];
+    // 小数部分
     decArr: ["Sphere003"];
     path1: "time/Countdown-";
     path2: ".png";
@@ -259,6 +261,7 @@ antHelper.videoPlay(alphaVideo, videoNode, videoUrl, repeatPlay);
 
 antHelper.audioPlay({
     audioPath: "audio/birthday.mp3",
+    autoPlay: true,
     option: {
         repeatCount: 2
         // playEnd: "audio/loop.mp3"
@@ -279,6 +282,7 @@ antHelper.systemWin({
         }
     },
 })
+
 
 /**
  * [userAuth 用户授权，获取基本信息nickName，avatar， gender，userId]
@@ -307,27 +311,28 @@ antHelper.userAuth({
  * @callBack {[function]} [成功回调]
  * @failcallBack {[function]} [失败回调]
  */
- antHelper.getTicket({
-     ticketTag: "test",
-     // 可选
-     callBack: function(response) {
-         var obj = JSON.parse(response.data)
-         var ticketUrl = obj.data.url;
-             AR.open_url(ticketUrl)
-             AR.toast("success" + ticketUrl)
-             if(ticketUrl != "" || ticketUrl != "undefined") {
-                 AR.setTimeout(function() {
-                     AR.set_texture("UI6_kaiqi", "BQCNY.fbm/btn_yikaiqi.png", 0);
-                 }, 800);
-             }
-     },
-     failCallBack: function(response) {
-        // 失败回调，可选
-     }
- });
+antHelper.getTicket({
+    ticketTag: "test",
+    // 可选
+    callBack: function(response) {
+        var obj = JSON.parse(response.data)
+        var iniUrl = obj.data.url;
+        if(iniUrl.length > 10) {
+            var ticketUrl = antHelper.removeTrim(iniUrl);
+            AR.open_url(ticketUrl)
+            AR.toast("success" + ticketUrl)
+            AR.setTimeout(function() {
+                AR.set_texture("UI6_kaiqi", "BQCNY.fbm/btn_yikaiqi.png", 0);
+            }, 1000);
+        }
+    },
+    failCallBack: function(response) {
+    // 失败回调，可选
+    }
+});
 
-// 发送得分
- antHelper.sendScore({
+// 发送得分, 首用味全排行榜。
+antHelper.sendScore({
     totalPoints: 90,
     projectName: "weiquan",
     callBack: function(response) {
@@ -336,7 +341,7 @@ antHelper.userAuth({
     failCallBack: function(response) {
         // 可选
     }
- })
+})
 
 //收集
   antHelper.collect({
